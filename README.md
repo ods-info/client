@@ -1,3 +1,3 @@
-# Next.js_Template
+# client
 
-Next.js template for those who want to start fast
+ods-info repo for client
