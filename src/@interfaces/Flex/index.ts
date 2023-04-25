@@ -11,4 +11,5 @@ export interface FlexProps {
   width?: string;
   height?: string;
   wrap?: string;
+  overflow?: string;
 }

@@ -11,6 +11,7 @@ export const Flex = ({
   width = "100%",
   height = "auto",
   wrap = "no-wrap",
+  overflow = "visible",
 }: FlexProps) => {
   return (
     <FlexBase
@@ -22,22 +23,14 @@ export const Flex = ({
       width={width}
       height={height}
       wrap={wrap}
+      overflow={overflow}
     >
       {children}
     </FlexBase>
   );
 };
 
-const FlexBase = styled.div<{
-  display?: string;
-  direction?: string;
-  justify?: string;
-  align?: string;
-  gap?: number;
-  width?: string;
-  height?: string;
-  wrap: string;
-}>`
+const FlexBase = styled.div<FlexProps>`
   display: ${({ display }) => display};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
@@ -46,4 +39,5 @@ const FlexBase = styled.div<{
   align-items: ${({ align }) => align};
   gap: ${({ gap }) => `${gap}px`};
   flex-wrap: ${({ wrap }) => wrap};
+  overflow: ${({ overflow }) => overflow};
 `;

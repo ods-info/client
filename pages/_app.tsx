@@ -3,6 +3,7 @@ import DefaultSeoInfo from "next-seo.config";
 import type { AppProps } from "next/app";
 import { Applayout } from "~/@components/templates/Applayout";
 import GlobalStyle from "~/@styles/GlobalStyle";
+import "~/@styles/font.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
