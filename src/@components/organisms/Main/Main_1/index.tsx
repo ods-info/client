@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import styled from "styled-components";
 import { Flex } from "~/@components/atoms/Flex";
 import { Space } from "~/@components/atoms/Space";
@@ -6,28 +9,50 @@ import { Button } from "~/@components/molecules/Button";
 
 export const Main_1 = () => {
   const curDate = new Date().toISOString().slice(2, 10).replaceAll("-", ".");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = "./deprecated.svg";
+
+    const handleLoad = () => {
+      setIsLoaded(true);
+    };
+
+    image.addEventListener("load", handleLoad);
+
+    return () => {
+      image.removeEventListener("load", handleLoad);
+    };
+  }, []);
 
   return (
-    <Main_1_Container src="./deprecated.svg">
-      <Flex align="start">
-        <Flex direction="row" justify="start">
-          <Text font="Spoqa" weight={500} size={17} text={curDate} color="white" />
-          &nbsp;
-          <Text font="Spoqa" weight={300} size={17} text={"기준 수질 부적합 생수"} color="white" />
-        </Flex>
-        <Flex direction="row" justify="start" gap={8}>
-          <Text font="Spoqa" weight={500} size={60} text={1} color="white" />
+    <>
+      {isLoaded ? (
+        <Main_1_Container src="./deprecated.svg">
           <Flex align="start">
-            <Space margin="15px" />
-            <Text font="Spoqa" weight={300} size={17} text={"건 있습니다"} color="white" />
+            <Flex direction="row" justify="start">
+              <Text font="Spoqa" weight={500} size={17} text={curDate} color="white" />
+              &nbsp;
+              <Text font="Spoqa" weight={300} size={17} text={"기준 수질 부적합 생수"} color="white" />
+            </Flex>
+            <Flex direction="row" justify="start" gap={8}>
+              <Text font="Spoqa" weight={500} size={60} text={1} color="white" />
+              <Flex align="start">
+                <Space margin="15px" />
+                <Text font="Spoqa" weight={300} size={17} text={"건 있습니다"} color="white" />
+              </Flex>
+            </Flex>
+            <Space margin="10px" />
+            <Button padding="8px 24px 6px 24px" background="white">
+              <Text font="Spoqa" size={17} color="#4EAAFF" weight={500} text={"더 알아보기"} />
+            </Button>
           </Flex>
-        </Flex>
-        <Space margin="10px" />
-        <Button padding="8px 24px 6px 24px" background="white">
-          <Text font="Spoqa" size={17} color="#4EAAFF" weight={500} text={"더 알아보기"} />
-        </Button>
-      </Flex>
-    </Main_1_Container>
+        </Main_1_Container>
+      ) : (
+        <Skeleton height={190.8} borderRadius={30} />
+      )}
+    </>
   );
 };
 
